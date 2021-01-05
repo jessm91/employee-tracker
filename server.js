@@ -1,13 +1,13 @@
 const inquirer = require("inquirer");
 let Database = require("./db/database");
-let table = require("console.table");
+let cTable = require("console.table");
 
 const db = new Database({
     host: "localhost",
     port: 3306,
     user: "root",
     password: "Shifting Shadows",
-    database: "system"
+    database: "et"
   });
   
 async function getManagerNames() {
@@ -168,16 +168,16 @@ async function mainPrompt() {
                 type: "list",
                 message: "What would you like to do?",
                 name: "action",
-                choices: [
-                  "Add department",
-                  "Add employee",
-                  "Add role",
-                  "Remove employee",
-                  "Update employee role",
-                  "View all departments",
-                  "View all employees",
-                  "View all employees by department",
-                  "View all roles",
+                choices: [,
+                  "View All Departments",
+                  "Add Department",
+                  "View All Employees",
+                  "View All Employees By Department",
+                  "Add Employee",
+                  "Remove Employee",
+                  "Update Employee Role",
+                  "View All Roles",
+                  "Add Role",
                   "Exit"
                 ]
             }
@@ -300,13 +300,13 @@ async function main() {
         const prompt = await mainPrompt();
 
         switch(prompt.action) {
-            case 'Add department': {
+            case 'Add Department': {
                 const newDepartmentName = await getDepartmentInfo();
                 await addDepartment(newDepartmentName);
                 break;
             }
 
-            case 'Add employee': {
+            case 'Add Employee': {
                 const newEmployee = await getAddEmployeeInfo();
                 console.log("add an employee");
                 console.log(newEmployee);
@@ -314,41 +314,41 @@ async function main() {
                 break;
             }
 
-            case 'Add role': {
+            case 'Add Role': {
                 const newRole = await getRoleInfo();
                 console.log("add a role");
                 await addRole(newRole);
                 break;
             }
 
-            case 'Remove employee': {
+            case 'Remove Employee': {
                 const employee = await getRemoveEmployeeInfo();
                 await removeEmployee(employee);
                 break;
             }
             
-            case 'Update employee role': {
+            case 'Update Employee Role': {
                 const employee = await getUpdateEmployeeRoleInfo();
                 await updateEmployeeRole(employee);
                 break;
             }
 
-            case 'View all departments': {
+            case 'View All Departments': {
                 await viewAllDepartments();
                 break;
             }
 
-            case 'View all employees': {
+            case 'View All Employees': {
                 await viewAllEmployees();
                 break;
             }
 
-            case 'View all employees by department': {
+            case 'View All Employees By Department': {
                 await viewAllEmployeesByDepartment();
                 break;
             }
 
-            case 'View all roles': {
+            case 'View All Roles': {
                 await viewAllRoles();
                 break;
             }

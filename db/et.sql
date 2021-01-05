@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS system;
+DROP DATABASE IF EXISTS et;
 
-CREATE database system;
+CREATE database et;
 
-USE system;
+USE et;
 
 CREATE TABLE department (
   id INTEGER NOT NULL auto_increment PRIMARY KEY,

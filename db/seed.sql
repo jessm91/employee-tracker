@@ -1,4 +1,4 @@
-USE system;
+USE et;
 
 INSERT into department (name) VALUES ("Sales");
 INSERT into department (name) VALUES ("Finance");
