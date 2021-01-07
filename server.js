@@ -6,7 +6,7 @@ const db = new Database({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "Shifting Shadows",
+    password: "jessica1991",
     database: "et"
   });
   
@@ -59,6 +59,7 @@ async function getRoleId(roleName) {
 
 async function getEmployeeId(fullName) {
     let employee = getFirstAndLastName(fullName);
+
     let query = 'SELECT id FROM employee WHERE employee.first_name=? AND employee.last_name=?';
     let args=[employee[0], employee[1]];
     const rows = await db.query(query, args);
@@ -67,6 +68,7 @@ async function getEmployeeId(fullName) {
 
 async function getEmployeeNames() {
     let query = "SELECT * FROM employee";
+
     const rows = await db.query(query);
     let employeeNames = [];
     for(const employee of rows) {
@@ -120,6 +122,7 @@ function getFirstAndLastName( fullName ) {
 async function updateEmployeeRole(employeeInfo) {
     const roleId = await getRoleId(employeeInfo.role);
     const employee = getFirstAndLastName(employeeInfo.employeeName);
+
     let query = 'UPDATE employee SET role_id=? WHERE employee.first_name=? AND employee.last_name=?';
     let args=[roleId, employee[0], employee[1]];
     const rows = await db.query(query, args);
@@ -129,6 +132,7 @@ async function updateEmployeeRole(employeeInfo) {
 async function addEmployee(employeeInfo) {
     let roleId = await getRoleId(employeeInfo.role);
     let managerId = await getEmployeeId(employeeInfo.manager);
+
     let query = "INSERT into employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)";
     let args = [employeeInfo.first_name, employeeInfo.last_name, roleId, managerId];
     const rows = await db.query(query, args);
@@ -152,7 +156,6 @@ async function addDepartment(departmentInfo) {
 }
 
 async function addRole(roleInfo) {
-    const departmentId = await getDepartmentId(roleInfo.departmentName);
     const salary = roleInfo.salary;
     const title = roleInfo.roleName;
     let query = 'INSERT into role (title, salary, department_id) VALUES (?,?,?)';
@@ -168,16 +171,16 @@ async function mainPrompt() {
                 type: "list",
                 message: "What would you like to do?",
                 name: "action",
-                choices: [,
-                  "View All Departments",
+                choices: [
                   "Add Department",
+                  "Add Employee",
+                  "Add Role",
+                  "Remove Employee",
+                  "Update Employee role",
+                  "View All Departments",
                   "View All Employees",
                   "View All Employees By Department",
-                  "Add Employee",
-                  "Remove Employee",
-                  "Update Employee Role",
                   "View All Roles",
-                  "Add Role",
                   "Exit"
                 ]
             }
