@@ -3,6 +3,8 @@
 This application keeps records of a company's employees. It is used through the command line.
 
 ![screenshot](screenshot.png)
+
+link to demo video:
 https://drive.google.com/file/d/1kc6pHA_3wI_ZARhiv-hDOMlQg3BTeoHr/view
 
 ## Installation
