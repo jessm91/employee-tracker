@@ -156,6 +156,7 @@ async function addDepartment(departmentInfo) {
 }
 
 async function addRole(roleInfo) {
+    const departmentId = await getDepartmentId(roleInfo.departmentName);
     const salary = roleInfo.salary;
     const title = roleInfo.roleName;
     let query = 'INSERT into role (title, salary, department_id) VALUES (?,?,?)';
@@ -176,7 +177,7 @@ async function mainPrompt() {
                   "Add Employee",
                   "Add Role",
                   "Remove Employee",
-                  "Update Employee role",
+                  "Update Employee Role",
                   "View All Departments",
                   "View All Employees",
                   "View All Employees By Department",
